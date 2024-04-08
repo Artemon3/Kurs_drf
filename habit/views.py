@@ -1,4 +1,5 @@
 import rest_framework
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from habit.models import Habit
