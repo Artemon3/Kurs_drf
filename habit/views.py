@@ -1,4 +1,3 @@
-import rest_framework
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -9,13 +8,13 @@ from habit.serializers import HabitSerializer
 
 
 # Create your views here.
-class HabitCreateAPIView(rest_framework.generics.CreateAPIView):
+class HabitCreateAPIView(generics.CreateAPIView):
     """ Create lesson """
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
 
-class HabitListAPIView(rest_framework.generics.ListAPIView):
+class HabitListAPIView(generics.ListAPIView):
     """ All lesson """
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
@@ -23,26 +22,26 @@ class HabitListAPIView(rest_framework.generics.ListAPIView):
     pagination_class = HabitPaginator
 
 
-class HabitRetrieveAPIView(rest_framework.generics.RetrieveAPIView):
+class HabitRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
-class HabitUpdateAPIView(rest_framework.generics.UpdateAPIView):
+class HabitUpdateAPIView(generics.UpdateAPIView):
     """ Update lesson """
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsOwner]
 
 
-class HabitDestroyAPIView(rest_framework.generics.DestroyAPIView):
+class HabitDestroyAPIView(generics.DestroyAPIView):
     """ Delete lesson """
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
-class PublicHabitListAPIView(rest_framework.generics.ListAPIView):
+class PublicHabitListAPIView(generics.ListAPIView):
     """ All public lesson """
     serializer_class = HabitSerializer
     queryset = Habit.objects.filter(is_published=True)
