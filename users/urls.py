@@ -10,7 +10,7 @@ from users.views import UserCreateAPIView, UserUpdateAPIView, UserRetrieveAPIVie
 
 app_name = UsersConfig.name
 
-urlpatterns = {
+urlpatterns = [
     path('login/', UserCreateAPIView.as_view(), name='login_user'),
     path('update/<int:pk>/', UserUpdateAPIView.as_view(), name='update_user'),
     path('detail/<int:pk>/', UserRetrieveAPIView.as_view(), name='detail_user'),
@@ -18,4 +18,4 @@ urlpatterns = {
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-}
+]
