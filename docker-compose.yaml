@@ -3,11 +3,11 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=os.getenv('DB_USER')
+      - POSTGRES_PASSWORD=os.getenv('DB_PASSWORD')
+      - POSTGRES_DB=os.getenv('DB_NAME')
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./data:/var/lib/postgresql/db_data
     ports:
       - '5438:5432'
     healthcheck:
@@ -27,15 +27,20 @@ services:
       - "8001:8000"
 
 #  db:
-#    container_name: postgresql
-#    image: postgres:15-alpine
+#    image: postgres
 #    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: 1234
-#      POSTGRES_DB: project7
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_DB=postgres
 #    volumes:
 #      - db_data:/var/lib/postgresql/data
-
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#    ports:
+#    - '5404:5432'
   redis:
     container_name: redisk
     image: redis:latest
